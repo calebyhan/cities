@@ -17,4 +17,14 @@ def search(query):
     return response["_embedded"]["city:search-results"][i]["_links"]["city:item"]["href"]
 
 
-print(search("london"))
+def city(link):
+    response = requests.get(link).json()
+
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print(f"Location: {response['full_name']}")
+    print(f"ID: {response['geoname_id']}")
+    print(f"Population: {response['population']}")
+    print(f"Coordinates: ({response['location']['latlon']['latitude']}, {response['location']['latlon']['longitude']})")
+
+
+city(search("knoxville"))
